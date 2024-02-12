@@ -22,9 +22,9 @@ export default {
       },
 
       fontSize: {
-        body_1: ['16px', 'regular'],
-        body_2: ['16px', 'semibold'],
-        body_3: ['16px', 'bold'],
+        body_1: '16px',
+        body_2: '16px',
+        body_3: '16px',
 
         headline_sm: '21px',
         headline_md: '26px',
@@ -32,19 +32,14 @@ export default {
         headline_xl: '63px',
       },
 
-      // fontWeight: {
-      //   body_1_w: 'regular',
-      //   body_2_w: 'semibold',
-      //   body_3_w: 'bold',
-
-      //   headline_sm_w: 'semibold',
-      //   headline_md_w: 'medium',
-      //   headline_lg_w: 'semibold',
-      //   headline_xl_w: 'bold',
-      // },
-
       fontFamily: {
-        nunito: ['Nunito', 'sans'],
+        nunito: ['Nunito', 'sans-serif'],
+      },
+      fontWeight: {
+        normal: 400,
+        medium: 500,
+        semibold: 600,
+        bold: 700,
       },
     },
   },

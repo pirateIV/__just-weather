@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import SearchInput from '../SearchInput';
+/* eslint-disable react/prop-types */
+import { useState } from 'react';
+import Search from '../Search';
 import ToggleSwitch from '../ToggleSwitch';
 import Container from '../common/Container';
 import SwitchDegree from '../common/SwitchDegree';
 
-const Navigation = () => {
+const Navigation = (props) => {
+  const { searchQuery, handleSearch, searchResults } = props;
   const [checked, setChecked] = useState(false);
 
   const handleChecked = () => {
@@ -21,7 +23,11 @@ const Navigation = () => {
             alt='weather app logo'
             className='pointer-events-none object-cover'
           />
-          <SearchInput />
+          <Search
+            searchQuery={searchQuery}
+            handleSearch={handleSearch}
+            searchResults={searchResults}
+          />
           <ToggleSwitch checked={checked} handleChecked={handleChecked}>
             <SwitchDegree
               value='°F'
