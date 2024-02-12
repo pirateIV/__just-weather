@@ -2,7 +2,7 @@ import React from 'react'
 
 const WeatherApp = ({children}) => {
   return (
-    <div>{children}</div>
+    <div className='h-full w-full'>{children}</div>
   )
 }
 

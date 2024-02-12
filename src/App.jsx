@@ -8,7 +8,9 @@ import apiService from './services/apiService';
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [showResults, setShowResults] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState(null);
+  const [current, setCurrent] = useState(null);
 
   const handleSearch = async (query) => {
     setSearchQuery(query);
@@ -30,13 +32,27 @@ function App() {
     setTypingTimeout(timeout);
   };
 
+  const handleCityInfo = async (city) => {
+    try {
+      const cityData = await apiService.getCityInfo(city);
+      setCurrent(cityData);
+      console.log(current);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <WeatherApp>
+        <div className='fixed inset-0' onClick={() => setShowResults(false)}></div>
         <Navigation
           searchQuery={searchQuery}
+          showResults={showResults}
           handleSearch={handleSearch}
-          searchResults={searchResults}></Navigation>
+          handleCityInfo={handleCityInfo}
+          searchResults={searchResults}
+          setShowResults={setShowResults}></Navigation>
       </WeatherApp>
     </>
   );

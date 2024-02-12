@@ -1,8 +1,5 @@
 import axios from 'axios';
-import debounce from '../helpers/debounce';
 import { api_key, baseUrl } from './weatherService';
-
-// let currentCity = localStorage.getItem('current_city');
 
 const city_weather_url =
   ' https://api.weatherapi.com/v1/current.json?key=5e876824d05746fb905153716240602&q=madrid';
@@ -22,4 +19,12 @@ const getWeatherDetails = async () => {
   return data;
 };
 
-export default { getSearchQuery, getWeatherDetails };
+const getCityInfo = async (city) => {
+  const cityUrl = `${baseUrl}/current.json?key=${api_key}&q=${city}`;
+
+  const res = await axios.get(cityUrl);
+  const { data } = await res;
+  return data;
+};
+
+export default { getSearchQuery, getWeatherDetails, getCityInfo };

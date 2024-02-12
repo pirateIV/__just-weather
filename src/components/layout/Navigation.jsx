@@ -4,9 +4,17 @@ import Search from '../Search';
 import ToggleSwitch from '../ToggleSwitch';
 import Container from '../common/Container';
 import SwitchDegree from '../common/SwitchDegree';
+import SearchResults from '../SearchResults';
 
 const Navigation = (props) => {
-  const { searchQuery, handleSearch, searchResults } = props;
+  const {
+    showResults,
+    searchQuery,
+    handleSearch,
+    searchResults,
+    handleCityInfo,
+    setShowResults,
+  } = props;
   const [checked, setChecked] = useState(false);
 
   const handleChecked = () => {
@@ -27,7 +35,16 @@ const Navigation = (props) => {
             searchQuery={searchQuery}
             handleSearch={handleSearch}
             searchResults={searchResults}
-          />
+            setShowResults={setShowResults}>
+            {showResults && (
+              <SearchResults
+                searchQuery={searchQuery}
+                searchResults={searchResults}
+                handleCityInfo={handleCityInfo}
+              />
+            )}
+          </Search>
+
           <ToggleSwitch checked={checked} handleChecked={handleChecked}>
             <SwitchDegree
               value='°F'

@@ -1,4 +1,4 @@
-const SearchResults = ({ searchQuery, searchResults }) => {
+const SearchResults = ({ searchQuery, searchResults, handleCityInfo }) => {
   return (
     <ul
       id='search-results'
@@ -9,7 +9,7 @@ const SearchResults = ({ searchQuery, searchResults }) => {
             key={res.id}
             className='py-2 px-4 cursor-pointer text-gray_900 hover:text-white hover:bg-indigo_400 focus:bg-indigo_400 focus:text-white focus:outline-none transition-opacity'
             tabIndex='0'
-            onClick={(e) => console.log(e.target.textContent)}>
+            onClick={() => handleCityInfo(res.name)}>
             {res.name}, {res.region}, {res.country}
           </li>
         ))
