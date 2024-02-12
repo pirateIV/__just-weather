@@ -11,7 +11,7 @@ const ToggleSwitch = ({ checked, handleChecked, children }) => {
         onChange={() => handleChecked()}
       />
       <button
-        className='bg-indigo_400 w-[28px] h-[28px] rounded-full translate-x-[0] transition-transform'
+        className='bg-indigo_400 w-[29px] h-[29px] rounded-full translate-x-[0] transition-transform'
         style={{
           transform: checked ? 'translateX(100%)' : 'translateX(0%)',
         }}></button>

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { api_key, baseUrl } from './weatherService';
 
-
 const city_weather_url =
   ' https://api.weatherapi.com/v1/current.json?key=5e876824d05746fb905153716240602&q=madrid';
 
@@ -10,7 +9,6 @@ const getSearchQuery = async (searchQuery) => {
 
   const queryRes = await axios.get(searchUrl);
   const { data } = await queryRes;
-  console.log(data);
   return data;
 };
 
@@ -28,4 +26,17 @@ const getCityInfo = async (city) => {
   return data;
 };
 
-export default { getSearchQuery, getWeatherDetails, getCityInfo };
+const getDailyWeatherForecast = async (city) => {
+  const forecastUrl = `${baseUrl}/forecast.json?key=${api_key}&q=${city}&days=1&aqi=no&alerts=no`;
+
+  const res = await axios.get(forecastUrl);
+  const data = await res.data;
+  return data.forecast;
+};
+
+export default {
+  getSearchQuery,
+  getWeatherDetails,
+  getCityInfo,
+  getDailyWeatherForecast,
+};

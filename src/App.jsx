@@ -5,14 +5,16 @@ import Navigation from './components/layout/Navigation';
 import WeatherApp from './components/layout/WeatherApp';
 import apiService from './services/apiService';
 import Header from './components/Header';
+import ForeCastToday from './components/layout/ForeCastToday';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [tempUnit, setTempUnit] = useState('temp_f');
   const [showResults, setShowResults] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
   const [typingTimeout, setTypingTimeout] = useState(null);
   const [currentWeather, setCurrentWeather] = useState(null);
-  const [tempUnit, setTempUnit] = useState('temp_f');
+  const [dailyForecast, setDailyForecast] = useState(null);
 
   const cityFromStorage = localStorage.getItem('current_city_weather_details');
 
@@ -40,9 +42,10 @@ function App() {
     try {
       const cityData = await apiService.getCityInfo(city);
       setCurrentWeather(cityData);
-      console.log(currentWeather)
 
-      localStorage.setItem('current_city_weather_details', JSON.stringify(city));
+      localStorage.setItem('current_city_weather_details', city);
+      const dailyForecast = await apiService.getDailyWeatherForecast(city);
+      setDailyForecast(Object.values(dailyForecast)[0][0].hour);
     } catch (error) {
       console.log(error);
     }
@@ -66,6 +69,7 @@ function App() {
           searchResults={searchResults}
           setShowResults={setShowResults}></Navigation>
         <Header tempUnit={tempUnit} currentWeather={currentWeather} />
+        <ForeCastToday tempUnit={tempUnit} dailyForecast={dailyForecast} />
       </WeatherApp>
     </>
   );
