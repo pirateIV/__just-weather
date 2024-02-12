@@ -12,6 +12,8 @@ const Navigation = (props) => {
     searchQuery,
     handleSearch,
     searchResults,
+    tempUnit,
+    setTempUnit,
     handleCityInfo,
     setShowResults,
   } = props;
@@ -20,6 +22,7 @@ const Navigation = (props) => {
   const handleChecked = () => {
     console.log(checked);
     setChecked(!checked);
+    setTempUnit(tempUnit === 'temp_f' ? 'temp_c' : 'temp_f');
   };
 
   return (

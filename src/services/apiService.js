@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { api_key, baseUrl } from './weatherService';
 
+
 const city_weather_url =
   ' https://api.weatherapi.com/v1/current.json?key=5e876824d05746fb905153716240602&q=madrid';
 
