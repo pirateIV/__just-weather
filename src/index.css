@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  html {
+  html, body {
     font-family: "Nunito", sans-serif;
   }
 }

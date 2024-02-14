@@ -8,15 +8,16 @@ import SearchResults from '../SearchResults';
 
 const Navigation = (props) => {
   const {
+    tempUnit,
+    setTempUnit,
     showResults,
     searchQuery,
     handleSearch,
     searchResults,
-    tempUnit,
-    setTempUnit,
     handleCityInfo,
     setShowResults,
   } = props;
+
   const [checked, setChecked] = useState(false);
 
   const handleChecked = () => {
@@ -27,41 +28,35 @@ const Navigation = (props) => {
 
   return (
     <nav className='w-full'>
-      <Container>
-        <div className='w-full flex items-center justify-between py-8'>
-          <img
-            src='./src/assets/icons/logo.svg'
-            alt='weather app logo'
-            className='pointer-events-none object-cover'
-          />
-          <Search
-            searchQuery={searchQuery}
-            handleSearch={handleSearch}
-            searchResults={searchResults}
-            setShowResults={setShowResults}>
-            {showResults && (
-              <SearchResults
-                searchQuery={searchQuery}
-                searchResults={searchResults}
-                handleCityInfo={handleCityInfo}
-              />
-            )}
-          </Search>
+      <div className='w-full flex items-center justify-between py-8'>
+        <img
+          src='./src/assets/icons/logo.svg'
+          alt='weather app logo'
+          className='pointer-events-none object-cover'
+        />
+        <Search
+          searchQuery={searchQuery}
+          handleSearch={handleSearch}
+          searchResults={searchResults}
+          setShowResults={setShowResults}>
+          {showResults && (
+            <SearchResults
+              searchQuery={searchQuery}
+              searchResults={searchResults}
+              handleCityInfo={handleCityInfo}
+            />
+          )}
+        </Search>
 
-          <ToggleSwitch checked={checked} handleChecked={handleChecked}>
-            <SwitchDegree
-              value='°F'
-              type='fahrenheit'
-              cs={checked ? '' : 'text-gray_100'}
-            />
-            <SwitchDegree
-              value='°C'
-              type='celsius'
-              cs={!checked ? '' : 'text-gray_100'}
-            />
-          </ToggleSwitch>
-        </div>
-      </Container>
+        <ToggleSwitch checked={checked} handleChecked={handleChecked}>
+          <SwitchDegree
+            value='°F'
+            type='fahrenheit'
+            cs={checked ? '' : 'text-gray_100'}
+          />
+          <SwitchDegree value='°C' type='celsius' cs={!checked ? '' : 'text-gray_100'} />
+        </ToggleSwitch>
+      </div>
     </nav>
   );
 };

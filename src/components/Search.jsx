@@ -4,7 +4,7 @@ import SearchResults from './SearchResults';
 const Search = ({ children, searchQuery, handleSearch, setShowResults }) => {
   const searchRef = useRef();
 
-  const handleShowResults = (e) => {
+  const handleShowResults = () => {
     setShowResults(true);
   };
 

@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
+import Header from './components/Header';
 import Navigation from './components/layout/Navigation';
 import WeatherApp from './components/layout/WeatherApp';
-import apiService from './services/apiService';
-import Header from './components/Header';
 import ForeCastToday from './components/layout/ForeCastToday';
+
+import getWeatherInfo from './services/apiService';
+import Container from './components/common/Container';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -16,7 +18,16 @@ function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [dailyForecast, setDailyForecast] = useState(null);
 
-  const cityFromStorage = localStorage.getItem('current_city_weather_details');
+  const [currentCity, setCurrentCity] = useState(
+    localStorage.getItem('current_city_weather_details') || ''
+  );
+
+  useEffect(() => {
+    localStorage.setItem('current_city_weather_details', currentCity);
+    handleCityInfo(currentCity);
+  }, [currentCity]);
+
+  // const cityFromStorage = localStorage.getItem('current_city_weather_details');
 
   const handleSearch = async (query) => {
     setSearchQuery(query);
@@ -29,8 +40,9 @@ function App() {
     }
     const timeout = setTimeout(async () => {
       try {
-        const results = await apiService.getSearchQuery(searchQuery);
+        const results = (await getWeatherInfo(currentCity, searchQuery)).searchData;
         setSearchResults(results);
+        console.log(results);
       } catch (error) {
         console.log(error);
       }
@@ -40,36 +52,34 @@ function App() {
 
   const handleCityInfo = async (city) => {
     try {
-      const cityData = await apiService.getCityInfo(city);
+      const cityData = (await getWeatherInfo(city, null)).cityData;
       setCurrentWeather(cityData);
 
       localStorage.setItem('current_city_weather_details', city);
-      const dailyForecast = await apiService.getDailyWeatherForecast(city);
+      const dailyForecast = (await getWeatherInfo(city, null)).forecastData;
       setDailyForecast(Object.values(dailyForecast)[0][0].hour);
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    handleCityInfo(cityFromStorage);
-  }, []);
-
   return (
     <>
       <WeatherApp>
         <div className='fixed inset-0' onClick={() => setShowResults(false)}></div>
-        <Navigation
-          tempUnit={tempUnit}
-          searchQuery={searchQuery}
-          setTempUnit={setTempUnit}
-          showResults={showResults}
-          handleSearch={handleSearch}
-          handleCityInfo={handleCityInfo}
-          searchResults={searchResults}
-          setShowResults={setShowResults}></Navigation>
-        <Header tempUnit={tempUnit} currentWeather={currentWeather} />
-        <ForeCastToday tempUnit={tempUnit} dailyForecast={dailyForecast} />
+        <Container>
+          <Navigation
+            tempUnit={tempUnit}
+            searchQuery={searchQuery}
+            setTempUnit={setTempUnit}
+            showResults={showResults}
+            handleSearch={handleSearch}
+            handleCityInfo={handleCityInfo}
+            searchResults={searchResults}
+            setShowResults={setShowResults}></Navigation>
+          <Header tempUnit={tempUnit} currentWeather={currentWeather} />
+          <ForeCastToday tempUnit={tempUnit} dailyForecast={dailyForecast} />
+        </Container>
       </WeatherApp>
     </>
   );
