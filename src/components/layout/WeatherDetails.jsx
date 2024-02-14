@@ -1,8 +1,10 @@
-import React from 'react'
+import Card from '../common/Card'
 
 const WeatherDetails = () => {
   return (
-    <div>WeatherDetails</div>
+    <Card title={'Weather Details'}>
+      
+    </Card>
   )
 }
 

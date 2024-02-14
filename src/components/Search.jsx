@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import SearchResults from './SearchResults';
 
 const Search = ({ children, searchQuery, handleSearch, setShowResults }) => {
   const searchRef = useRef();

@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect } from 'react';
-import Container from './common/Container';
 
 import favicon from '../helpers/getFavicon';
 import currentDate from '../helpers/formatDate';

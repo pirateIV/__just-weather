@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const ToggleSwitch = ({ checked, handleChecked, children }) => {
   return (
     <div className='relative flex items-center center w-[64px] h-[32px] p-1 bg-indigo_50 rounded-[60px] shadow-sm shadow-gray-400'>

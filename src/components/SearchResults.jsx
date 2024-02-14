@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
-import _ from 'lodash'
+import _ from 'lodash';
 
-const SearchResults = ({ searchQuery, searchResults, handleCityInfo }) => {
+const SearchResults = (props) => {
+  const { searchQuery, searchResults, handleCityInfo } = props;
+
   return (
     <ul
       id='search-results'
       className='absolute w-full mt-2 rounded-lg shadow-gray-400 shadow-sm overflow-hidden bg-indigo_50 z-10'>
       {searchResults?.length > 0 ? (
-       _.map(searchResults, (res) => (
+        _.map(searchResults, (res) => (
           <li
             key={res.id}
             className='py-2 px-4 cursor-pointer text-gray_900 hover:text-white hover:bg-indigo_400 focus:bg-indigo_400 focus:text-white focus:outline-none transition-opacity'

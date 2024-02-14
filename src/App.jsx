@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 import Header from './components/Header';
+import Search from './components/Search';
+import Container from './components/common/Container';
+import SearchResults from './components/SearchResults';
 import Navigation from './components/layout/Navigation';
 import WeatherApp from './components/layout/WeatherApp';
 import ForeCastToday from './components/layout/ForeCastToday';
+import WeatherDetails from './components/layout/WeatherDetails';
 
 import getWeatherInfo from './services/apiService';
-import Container from './components/common/Container';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,9 +21,7 @@ function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [dailyForecast, setDailyForecast] = useState(null);
 
-  const [currentCity, setCurrentCity] = useState(
-    localStorage.getItem('current_city_weather_details') || ''
-  );
+  const currentCity = localStorage.getItem('current_city_weather_details') || '';
 
   useEffect(() => {
     localStorage.setItem('current_city_weather_details', currentCity);
@@ -68,17 +69,26 @@ function App() {
       <WeatherApp>
         <div className='fixed inset-0' onClick={() => setShowResults(false)}></div>
         <Container>
-          <Navigation
-            tempUnit={tempUnit}
-            searchQuery={searchQuery}
-            setTempUnit={setTempUnit}
-            showResults={showResults}
-            handleSearch={handleSearch}
-            handleCityInfo={handleCityInfo}
-            searchResults={searchResults}
-            setShowResults={setShowResults}></Navigation>
+          <Navigation tempUnit={tempUnit} setTempUnit={setTempUnit}>
+            <Search
+              searchQuery={searchQuery}
+              handleSearch={handleSearch}
+              setShowResults={setShowResults}>
+              {showResults && (
+                <SearchResults
+                  searchQuery={searchQuery}
+                  searchResults={searchResults}
+                  handleCityInfo={handleCityInfo}
+                />
+              )}
+            </Search>
+          </Navigation>
+
           <Header tempUnit={tempUnit} currentWeather={currentWeather} />
+
           <ForeCastToday tempUnit={tempUnit} dailyForecast={dailyForecast} />
+
+          <WeatherDetails />
         </Container>
       </WeatherApp>
     </>
