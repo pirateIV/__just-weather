@@ -10,7 +10,6 @@ const Navigation = (props) => {
   const [checked, setChecked] = useState(false);
 
   const handleChecked = () => {
-    console.log(checked);
     setChecked(!checked);
     setTempUnit(tempUnit === 'temp_f' ? 'temp_c' : 'temp_f');
   };

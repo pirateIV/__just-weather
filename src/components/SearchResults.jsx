@@ -7,8 +7,8 @@ const SearchResults = (props) => {
   return (
     <ul
       id='search-results'
-      className='absolute w-full mt-2 rounded-lg shadow-gray-400 shadow-sm overflow-hidden bg-indigo_50 z-10'>
-      {searchResults?.length > 0 ? (
+      className='absolute w-full mt-2 rounded-lg shadow-gray-400 shadow-sm overflow-hidden bg-indigo_50 z-50'>
+      {searchQuery !== '' && searchResults?.length > 0 ? (
         _.map(searchResults, (res) => (
           <li
             key={res.id}

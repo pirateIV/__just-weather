@@ -1,11 +1,16 @@
-import Card from '../common/Card'
+import Card from '../common/Card';
 
 const WeatherDetails = () => {
   return (
-    <Card title={'Weather Details'} height='308' id='weatherDetails'>
-      
+    <Card
+      title={'Weather Details'}
+      ht={'h-[308px]'}
+      id='weatherDetails'>
+      <div className='w-full'>
+        <div></div>
+      </div>
     </Card>
-  )
-}
+  );
+};
 
-export default WeatherDetails
+export default WeatherDetails;

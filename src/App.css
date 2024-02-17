@@ -1,20 +1,17 @@
 @font-face {
   font-family: 'Nunito';
-  src: url('./assets/fonts/Nunito-Regular.ttf');
-  font-weight: 400;
+
+  src: url('./assets/fonts/Nunito-Regular.ttf'), url('./assets/fonts/Nunito-Medium.ttf'),
+    url('./assets/fonts/Nunito-SemiBold.ttf'), url('./assets/fonts/Nunito-Bold.ttf');
 }
-@font-face {
-  font-family: 'Nunito';
-  src: url('./assets/fonts/Nunito-Medium.ttf');
-  font-weight: 500;
+
+button.react-multiple-carousel__arrow {
+  background-color: rgba(102, 102, 102, 0.6) !important;
 }
-@font-face {
-  font-family: 'Nunito';
-  src: url('./assets/fonts/Nunito-SemiBold.ttf');
-  font-weight: 600;
+button.react-multiple-carousel__arrow:hover {
+  background-color: rgba(102, 102, 102, 0.8) !important;
+
 }
-@font-face {
-  font-family: 'Nunito';
-  src: url('./assets/fonts/Nunito-Bold.ttf');
-  font-weight: 700;
+button.react-multiple-carousel__arrow--left{
+  transform: translateX(-30px);
 }

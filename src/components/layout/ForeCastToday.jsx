@@ -1,22 +1,11 @@
 import _ from 'lodash';
-import Container from '../common/Container';
+
 import Card from '../common/Card';
+import ForeCast from '../ForeCast';
 
-const ForeCast = ({ forecast, dailyForecast, getTempUnit }) => {
-  return (
-    <div className='inline-flex flex-col items-center justify-center bg-white/[0.32] rounded-2xl w-[95px] h-[108px] p-4 flex-shrink-0 text-center'>
-      <h5 className='font-bold text-gray-400'>{forecast.time.split(' ')[1]}</h5>
-      <img
-        src={forecast.condition.icon}
-        alt='forecast weather icon'
-        width='50'
-      />
-      <h5 className='font-bold'>{getTempUnit(forecast)}</h5>
-    </div>
-  );
-};
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
-// eslint-disable-next-line react/prop-types
 const ForeCastToday = ({ tempUnit, dailyForecast }) => {
   const getTempUnit = (forecast) => {
     if (tempUnit === 'temp_f') {
@@ -26,22 +15,51 @@ const ForeCastToday = ({ tempUnit, dailyForecast }) => {
     }
   };
 
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 10,
+      slidesToSlide: 3,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 10,
+      slidesToSlide: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 5,
+      slidesToSlide: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 4,
+      slidesToSlide: 2,
+    },
+  };
+
   return (
     <Card
+      ht={`h-[185px]`}
       id='forecastToday'
-      height='190'
-      title={`Today's Forecast`}
-      cs={`flex flex-col items-start justify-between`}>
-      <div className='overflow-hidden gap-4 w-full flex items-center justify-center'>
+      title={`Today's Forecast`}>
+      <Carousel
+        arrows={true}
+        swipeable={true}
+        draggable={true}
+        keyBoardControl={true}
+        responsive={responsive}
+        transitionDuration={500}
+        customTransition='transform 500ms ease-in-out'
+        containerClass='flex justify-start ms-2 items-center space-x-2 h-[120px]'>
         {_.map(dailyForecast, (forecast) => (
           <ForeCast
             forecast={forecast}
             key={forecast.time_epoch}
             getTempUnit={getTempUnit}
-            dailyForecast={dailyForecast}
           />
         ))}
-      </div>
+      </Carousel>
     </Card>
   );
 };

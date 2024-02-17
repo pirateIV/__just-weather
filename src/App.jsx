@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
+import Container from './components/common/Container';
+
 import Header from './components/Header';
 import Search from './components/Search';
-import Container from './components/common/Container';
+import WeatherApp from './components/WeatherApp';
 import SearchResults from './components/SearchResults';
+
 import Navigation from './components/layout/Navigation';
-import WeatherApp from './components/layout/WeatherApp';
 import ForeCastToday from './components/layout/ForeCastToday';
 import WeatherDetails from './components/layout/WeatherDetails';
 
@@ -18,17 +20,15 @@ function App() {
   const [showResults, setShowResults] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [typingTimeout, setTypingTimeout] = useState(null);
-  const [currentWeather, setCurrentWeather] = useState(null);
   const [dailyForecast, setDailyForecast] = useState(null);
+  const [currentWeather, setCurrentWeather] = useState(null);
 
-  const currentCity = localStorage.getItem('current_city_weather_details') || '';
+  const currentCity = localStorage.getItem('current_city_weather_details') || 'Ibadan';
 
   useEffect(() => {
     localStorage.setItem('current_city_weather_details', currentCity);
     handleCityInfo(currentCity);
   }, [currentCity]);
-
-  // const cityFromStorage = localStorage.getItem('current_city_weather_details');
 
   const handleSearch = async (query) => {
     setSearchQuery(query);
@@ -67,26 +67,38 @@ function App() {
   return (
     <>
       <WeatherApp>
-        <div className='fixed inset-0' onClick={() => setShowResults(false)}></div>
         <Container>
-          <Navigation tempUnit={tempUnit} setTempUnit={setTempUnit}>
+          <Navigation
+            tempUnit={tempUnit}
+            setTempUnit={setTempUnit}>
             <Search
               searchQuery={searchQuery}
               handleSearch={handleSearch}
               setShowResults={setShowResults}>
               {showResults && (
-                <SearchResults
-                  searchQuery={searchQuery}
-                  searchResults={searchResults}
-                  handleCityInfo={handleCityInfo}
-                />
+                <>
+                  <div
+                    className='fixed inset-0 cursor-default z-40'
+                    onClick={() => setShowResults(false)}></div>
+                  <SearchResults
+                    searchQuery={searchQuery}
+                    searchResults={searchResults}
+                    handleCityInfo={handleCityInfo}
+                  />
+                </>
               )}
             </Search>
           </Navigation>
 
-          <Header tempUnit={tempUnit} currentWeather={currentWeather} />
+          <Header
+            tempUnit={tempUnit}
+            currentWeather={currentWeather}
+          />
 
-          <ForeCastToday tempUnit={tempUnit} dailyForecast={dailyForecast} />
+          <ForeCastToday
+            tempUnit={tempUnit}
+            dailyForecast={dailyForecast}
+          />
 
           <WeatherDetails />
         </Container>
