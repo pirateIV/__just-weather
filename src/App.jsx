@@ -10,9 +10,9 @@ import SearchResults from './components/SearchResults';
 
 import Navigation from './components/layout/Navigation';
 import ForeCastToday from './components/layout/ForeCastToday';
-import WeatherDetails from './components/layout/WeatherDetails';
+import WeatherDetails from './components/WeatherDetails';
 
-import getWeatherInfo from './services/apiService';
+import getWeatherInfo from './services/apiService'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -63,6 +63,16 @@ function App() {
       console.log(error);
     }
   };
+
+  // const weatherDetails = [
+  //   { type: 'Sunrise', img: './assets/icons/sunrise-icon.svg', url: },
+  //   { type: 'Sunset', img: './assets/icons/sunrise-icon.svg' },
+  //   { type: 'Chance of rain', img: './assets/icons/sunrise-icon.svg' },
+  //   { type: 'Wind', img: './assets/icons/sunrise-icon.svg' },
+  //   { type: 'UV Index', img: './assets/icons/sunrise-icon.svg' },
+  //   { type: 'Feels like', img: './assets/icons/sunrise-icon.svg' },
+  // ]
+  
 
   return (
     <>
