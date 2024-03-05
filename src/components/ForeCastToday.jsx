@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import Card from '../common/Card';
-import ForeCast from '../ForeCast';
+import Card from './common/Card';
+import ForeCast from './ForeCast';
 
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';

@@ -8,8 +8,8 @@ import Search from './components/Search';
 import WeatherApp from './components/WeatherApp';
 import SearchResults from './components/SearchResults';
 
-import Navigation from './components/layout/Navigation';
-import ForeCastToday from './components/layout/ForeCastToday';
+import Navigation from './components/Navigation';
+import ForeCastToday from './components/ForeCastToday';
 import WeatherDetails from './components/WeatherDetails';
 
 import getWeatherInfo from './services/apiService'

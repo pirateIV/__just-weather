@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 
-import ToggleSwitch from '../ToggleSwitch';
-import SwitchDegree from '../common/SwitchDegree';
+import ToggleSwitch from './ToggleSwitch';
+import SwitchDegree from './common/SwitchDegree';
 
 const Navigation = (props) => {
   const { children, tempUnit, setTempUnit } = props;
